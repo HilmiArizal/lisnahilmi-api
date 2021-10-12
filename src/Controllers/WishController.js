@@ -3,7 +3,7 @@ const { WishModel } = require("../Models");
 
 module.exports = {
     getWish: async (req, res) => {
-        await WishModel.find()
+        await WishModel.find().sort({ _id: -1 })
             .then((dataWish) => {
                 if (dataWish.length === 0) return res.status(404).send({ message: 'Data Empty' });
                 return res.status(200).send({ message: 'Data Successful', dataWish });

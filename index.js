@@ -16,8 +16,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const { WishRouter } = require('./src/Routers');
+const { WishRouter, PreweddingRouter } = require('./src/Routers');
 app.use('/api/wish', WishRouter);
+app.use('/api/prewedding', PreweddingRouter);
 
 app.get('/', (req, res) => {
     res.render(__dirname + '/public/index.html', { port: PORT });

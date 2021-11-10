@@ -6,17 +6,17 @@ const fs = require("fs");
 module.exports = {
 
     getPrewedding: async (req, res) => {
-        await PreweddingModel.find()
-        .then((results) => {
-            if (results.length > 0) {
-                res.status(200).send({ message: "Get Data Successful", results });
-            } else {
-                res.status(200).send({ message: "Empty Data" });
-            }
-        })
-        .catch((err) => {
-            res.status(500).send(err);
-        })
+        await PreweddingModel.find().sort({ order: 1 })
+            .then((results) => {
+                if (results.length > 0) {
+                    res.status(200).send({ message: "Get Data Successful", results });
+                } else {
+                    res.status(200).send({ message: "Empty Data" });
+                }
+            })
+            .catch((err) => {
+                res.status(500).send(err);
+            })
     },
 
     getListPrewedding: async (req, res) => {
@@ -27,7 +27,7 @@ module.exports = {
         await PreweddingModel.find().countDocuments()
             .then((count) => {
                 totalData = count;
-                return PreweddingModel.find().skip(currentPage * perPage).limit(perPage).sort({ createdAt: -1 });
+                return PreweddingModel.find().skip(currentPage * perPage).limit(perPage).sort({ order: 1 });
             })
             .then((results) => {
                 res.status(200).send({

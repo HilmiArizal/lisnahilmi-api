@@ -92,6 +92,16 @@ module.exports = {
             })
     },
 
+    getSession: async (req, res) => {
+        await WishModel.find(req.body)
+            .then((dataWish) => {
+                res.status(200).send({ message: 'Data Successful', dataWish });
+            })
+            .catch((err) => {
+                res.status(500).send({ message: 'Data Error' });
+            })
+    },
+
     getFriend: async (req, res) => {
         const friend = req.body;
         const currentPage = parseInt(req.query.currentPage);
